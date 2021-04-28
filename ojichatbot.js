@@ -13,7 +13,12 @@
       emojiNum: 4,
       punctuationLevel: 0,
     }
-    let res = ojichat(state);
+    let res
+    if (global.unkochat) {
+      res = unkochat(state)
+    } else {
+      res = ojichat(state);
+    }
     addOjisanMsg(res.result);
   }
 
@@ -92,14 +97,7 @@
       go.run(result.instance)
     );
     TALK.removeChild(document.getElementById("loading"));
-    // WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
-    //   go.run(result.instance);
-    //   // ロード画面を消す
-    //   TALK.removeChild(document.getElementById("loading"));
-    // });
   }
-
-  // MSGBOX.addEventListener('keyup', firstMsgClick);
   MSGBUTTON.addEventListener('click', firstMsgClick);
   CLOSEBUTTON.addEventListener('click', clickCloseButton);
   OPENBUTTON.addEventListener('click', clickOpenButton);
